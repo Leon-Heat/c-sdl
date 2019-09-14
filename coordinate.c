@@ -2,11 +2,6 @@
 #include "SDL2/SDL.h"
 #define WINDOWS_HEIGHT 480
 #define WINDOWS_LENGTH 640
-struct rect {
-	int x, y; 
-} RECT1;
-
-
 int main() {
 	SDL_Window *window;
 	window = SDL_CreateWindow(
@@ -23,8 +18,7 @@ int main() {
 												SDL_RENDERER_PRESENTVSYNC);
 	SDL_Event e;
 	int quit = 0;
-	struct rect RECT1;
-	RECT1.x = RECT1.y = 0;
+	int n[4] = { 0, 0};
 	while(!quit) {
 		while(SDL_PollEvent(&e)) {
 			switch(e.type) {
@@ -34,23 +28,23 @@ int main() {
 			}
 			switch(e.key.keysym.sym) {
 				case SDLK_UP:
-					RECT1.y -= 10;
+					n[0] -= 10;
 					break;
 				case SDLK_DOWN:
-					RECT1.y += 10;
+					n[0] += 10;
 					break;
 				case SDLK_LEFT:
-					RECT1.x -= 10;
+					n[1] -= 10;
 					break;
 				case SDLK_RIGHT:
-					RECT1.x += 10;
+					n[1] += 10;
 					break;
 				default:{}
 			}
 		}
 		SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0x00);
 		SDL_RenderClear(renderer);
-		SDL_Rect rectx = {	(WINDOWS_LENGTH  / 2 - WINDOWS_LENGTH / 30 ) + RECT1.x,
+		SDL_Rect rectx = {	(WINDOWS_LENGTH  / 2 - WINDOWS_LENGTH / 30 ) + n[1],
 						  	0,
 						   	WINDOWS_LENGTH / 15,
 						  	WINDOWS_HEIGHT,
@@ -58,21 +52,21 @@ int main() {
 		SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
 		SDL_RenderFillRect(renderer, &rectx);
 		SDL_Rect recty = {	0,
-							(WINDOWS_HEIGHT  / 2 - WINDOWS_HEIGHT / 30 ) + RECT1.y,
+							(WINDOWS_HEIGHT  / 2 - WINDOWS_HEIGHT / 30 ) + n[0],
 						   	WINDOWS_LENGTH,
 						  	WINDOWS_HEIGHT / 15,
 						};
 		SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
 		SDL_RenderFillRect(renderer, &recty);
-		SDL_Rect rect1 = {	(WINDOWS_LENGTH / 4) + RECT1.x,
-						  	(WINDOWS_HEIGHT / 4) + RECT1.y ,
+		SDL_Rect rect1 = {	(WINDOWS_LENGTH / 4) + n[1],
+						  	(WINDOWS_HEIGHT / 4) + n[0],
 						   	WINDOWS_LENGTH / 2,
 						  	WINDOWS_HEIGHT / 2,
 						};
 		SDL_SetRenderDrawColor(renderer, 0xFF, 0x00, 0x00, 0xFF);
 		SDL_RenderFillRect(renderer, &rect1);
-		SDL_Rect rect2 = {	(WINDOWS_LENGTH / 2  - WINDOWS_LENGTH / 8 ) + RECT1.x,
-						  	(WINDOWS_HEIGHT / 2  - WINDOWS_HEIGHT / 8 ) + RECT1.y ,
+		SDL_Rect rect2 = {	(WINDOWS_LENGTH / 2  - WINDOWS_LENGTH / 8 ) + n[1],
+						  	(WINDOWS_HEIGHT / 2  - WINDOWS_HEIGHT / 8 ) + n[0],
 						   	WINDOWS_LENGTH / 4,
 						  	WINDOWS_HEIGHT / 4,
 						};
