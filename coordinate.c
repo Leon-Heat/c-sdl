@@ -18,7 +18,7 @@ int main() {
 												SDL_RENDERER_PRESENTVSYNC);
 	SDL_Event e;
 	int quit = 0;
-	int n[4] = { 0, 0};
+	int n[2] = { 0, 0};
 	while(!quit) {
 		while(SDL_PollEvent(&e)) {
 			switch(e.type) {
